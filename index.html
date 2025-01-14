@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Pollo Loco</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="icon" type="image/x-icon" href="img/3_enemies_chicken/chicken_normal/1_walk/1_w.png">
+    <script src="./js/models/drawable-objects.class.js"></script>
+    <script src="./js/models/movable-object.class.js"></script>
+    <script src="./js/models/character.class.js"></script>
+    <script src="./js/models/chicken.class.js"></script>
+    <script src="./js/models/chicken-small.class.js"></script>
+    <script src="./js/models/coin.class.js"></script>
+    <script src="./js/models/bottle-ground.class.js"></script>
+    <script src="./js/models/cloud.class.js"></script>
+    <script src="./js/models/status-bar.class.js"></script>
+    <script src="./js/models/statusbar-bottle.class.js"></script>
+    <script src="./js/models/statusbar-coin.class.js"></script>
+    <script src="./js/models/statusbar-endboss.class.js"></script>
+    <script src="./js/models/collision-handler.class.js"></script>
+    <script src="./js/models/reset-handler.class.js"></script>
+    <script src="./js/models/audio-manager.class.js"></script>
+    <script src="./js/models/world.class.js"></script>
+    <script src="./js/models/background-object.class.js"></script>
+    <script src="./js/models/keyboard.class.js"></script>
+    <script src="./js/models/level.class.js"></script>
+    <script src="./js/models/throwable-objects.class.js"></script>
+    <script src="./js/models/endboss.class.js"></script>
+    <script src="./js/levels/level1.js"></script>
+    <script src="./js/game.js"></script>
+</head>
+
+<body onload="init()">
+
+    <div class="navbar-container">
+        <div class="navbar">
+            <a href="impressum.html" target="_blank">Impressum</a>
+            <div>|</div>
+            <a href="datenschutz.html" target="_blank">Privacy Policy</a>
+        </div>
+    </div>
+
+    <div id="rotateOverlay">
+        <div class="overlay-content">
+            <p>Please rotate your device to landscape mode.</p>
+        </div>
+    </div>
+
+    <img class="backgroundImage" src="img/desert.jpg" alt="background-Image">
+
+    <div id="fullscreen">
+        <h1>El pollo loco</h1>
+        <canvas id="canvas" width="720" height="480"></canvas>
+        <div class="start-button-container">
+            <button id="startButton" class="start-button" onclick="startGame()">Start Game</button>
+        </div>
+        <div class="button-container">
+            <button id="tryAgainBtn" class="try-again-btn" onclick="tryAgain()">Try Again?</button>
+        </div>
+        <div class="canvas-icon-width-container">
+            <div class="canvas-icon-container">
+                <div class="canvas-icons">
+                    <img class="volume-icon" onclick="switchIcon()" id="volumeIcon" src="img/volume.png"
+                        alt="Volume Icon">
+                    <img class="expand-icon" onclick="canvasFullscreen()" src="./img/expand.png" alt="expand Icon">
+                </div>
+            </div>
+        </div>
+        <div class="hud">
+            <div class="panel-left">
+                <button id="leftBtn"><img src="img/left-arrow.png" alt="left-Arrow"></button>
+                <button id="rightBtn"><img src="img/right-arrow.png" alt="right-Arrow"></button>
+            </div>
+            <div class="panel-right">
+                <button id="jumpBtn"><img src="img/upload.png" alt="jump-btn"></button>
+                <button id="thorwBtn"><img src="img/beer-bottle.png" alt="bottle-thorw-button"></button>
+            </div>
+        </div>
+
+        <div class="control">
+            <h1 class="headline-control">How to Play</h1>
+            <h2>Left Arrow - Character moves left</h2>
+            <h2>Right Arrow - Character moves right</h2>
+            <h2>Space Bar - Character jumps</h2>
+            <h2>Key D - Character throws bottle</h2>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,723 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Danfo', Arial, Helvetica, sans-serif;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+   
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+
+.backgroundImage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    z-index: -1;
+}
+
+
+canvas {
+    background-color: black;
+    display: block;
+}
+
+#fullscreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+    background-color: rgba(96, 5, 5, 0.486);
+    font-family: 'Courier New', Courier, monospace;
+    color: yellow;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.canvas-icon-width-container {
+    position: relative;
+    width: 720px;
+    bottom: 470px;
+    right: 0;
+    left: 0;
+}
+
+.canvas-icon-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.canvas-icons {
+    width: 80px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 24px;
+}
+
+.volume-icon {
+    height: 35px;
+    width: 35px;
+}
+
+.expand-icon {
+    height: 35px;
+    width: 35px;
+}
+
+.expand-icon:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.volume-icon:hover {
+    background-color: rgba(128, 128, 128, 0.2);
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.start-button {
+    transform: scale(1.1);
+    padding: 20px 40px;
+    font-size: 24px;
+    z-index: 1000;
+    cursor: pointer;
+    background-color: lightcoral;
+    font-family: 'Danfo', Arial, Helvetica, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.start-button-container {
+    width: 720px;
+    top: 165px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+}
+
+.button-container {
+    width: 720px;
+    position: relative;
+    bottom: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.try-again-btn {
+    display: none;
+    padding: 20px 40px;
+    font-size: 24px;
+    z-index: 1000;
+    cursor: pointer;
+    background-color: lightcoral;
+    font-family: 'Danfo', Arial, Helvetica, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+.navbar-container {
+    position: relative;
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1000;
+}
+
+.navbar {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 16px;
+    margin: 16px;
+    box-sizing: content-box;
+    gap: 8px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+.hud {
+    display: none;
+}
+
+.hud button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid black;
+    cursor: pointer;
+    background-color: rgb(230, 174, 97);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.1s ease, background-color 0.1s ease, border-color 0.1s ease;
+}
+
+.hud button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: rgb(249, 158, 30);
+    border-color: grey;
+    transition: transform 0.1s ease, background-color 0.1s ease, border-color 0.1s ease;
+}
+
+.hud img {
+    width: 20px;
+}
+
+.panel-left {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.panel-right {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+#rotateOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: none;
+    text-align: center;
+    z-index: 9999;
+    font-size: 32px;
+    padding: 20px;
+}
+
+.overlay-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+/*Smartphones*/
+
+@media screen and (orientation: portrait) {
+    #rotateOverlay {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 1080px) and (orientation: landscape) {
+    .hud {
+        position: absolute;
+        bottom: 120px;
+        top: 500px;
+        display: block;
+        width: 600px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .hud button {
+        width: 40px;
+        height: 40px;
+    }
+
+}
+
+@media screen and (max-width: 1366px) and (max-height: 1024px) and (orientation: landscape) {
+    .hud {
+        display: flex;
+        justify-content: space-between;
+        width: 600px;
+    }
+
+}
+
+@media screen and (max-width: 1144px) and (max-height: 767px) and (orientation: landscape) {
+    .hud {
+        display: flex;
+        justify-content: space-between;
+        width: 600px;
+    }
+
+}
+
+@media screen and (max-width: 1080px) and (max-height: 678px) and (orientation: landscape) {
+
+    .hud {
+        bottom: 45px;
+    }
+
+}
+
+@media screen and (max-width: 932px) and (max-height: 430px) and (orientation: landscape) {
+
+    .canvas-icon-width-container {
+        width: 1000px;
+        bottom: 420px;
+    }
+
+    .expand-icon {
+        display: none;
+    }
+
+    .navbar-container {
+        justify-content: center;
+    }
+
+    .hud {
+        top: 400px;
+        width: 800px;
+    }
+
+    .panel-left,
+    .panel-right{
+        gap: 24px;
+    }
+
+    h1,
+    .control, 
+    .navbar-container{
+        display: none;
+    }
+
+    html,
+    body {
+        overflow: hidden;
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+@media screen and (max-width: 915px) and (max-height: 412px) and (orientation: landscape) {
+
+    .hud {
+        top: 380px;
+    }
+
+    .canvas-icon-width-container {
+        width: 1000px;
+        bottom: 395px;
+    }
+}
+
+@media screen and (max-width: 896px) and (max-height: 414px) and (orientation: landscape) {
+
+    .canvas-icon-width-container {
+        width: 1000px;
+        bottom: 400px;
+    }
+
+    .expand-icon {
+        display: none;
+    }
+
+    .hud {
+        top: 470px;
+        width: 815px;
+    }
+
+    h1,
+    .control, 
+    .navbar-container{
+        display: none;
+    }
+
+    html,
+    body {
+        overflow: hidden;
+    }
+
+    .hud {
+        top: 390px;
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 844px) and (max-height: 390px) and (orientation: landscape) {
+
+    .canvas-icon-width-container {
+        width: 860px;
+        bottom: 385px;
+    }
+
+    .expand-icon {
+        display: none;
+    }
+
+    .hud {
+        top: 365px;
+        width: 570px;
+    }
+
+    h1,
+    .control, 
+    .navbar-container{
+        display: none;
+    }
+
+    html,
+    body {
+        overflow: hidden;
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+@media screen and (max-width: 740px) and (max-height: 360px) and (orientation: landscape) {
+
+    .canvas-icon-width-container {
+        width: 860px;
+        bottom: 350px;
+    }
+
+    .expand-icon {
+        display: none;
+    }
+
+    .hud {
+        top: 335px;
+        width: 570px;
+    }
+
+    h1,
+    .control, 
+    .navbar-container{
+        display: none;
+    }
+
+    html,
+    body {
+        overflow: hidden;
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+@media screen and (max-width: 667px) and (max-height: 375px) and (orientation: landscape) {
+    .hud {
+        top: 350px;
+    }
+
+    .canvas-icon-width-container {
+        width: 680px;
+        bottom: 365px;
+    }
+
+    h1,
+    .control, 
+    .navbar-container{
+        display: none;
+    }
+
+    html,
+    body {
+        overflow: hidden;
+    }
+    
+}
+
+
+/*Responsive styles*/
+
+@media (max-width: 1024px) and (orientation: portrait) {
+    .hud {
+        display: block;
+        width: 650px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .hud button {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 1000px) and (orientation: portrait) {
+    .navbar {
+        width: 250px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 800px) and (orientation: portrait) {
+    .navbar-container {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 715px) and (orientation: portrait) {
+    .canvas-icon-width-container {
+        bottom: 420px;
+        width: 690px;
+    }
+}
+
+@media (max-width: 670px) and (orientation: portrait) {
+    .hud {
+        width: 560px;
+        margin-bottom: 16px;
+    }
+
+    .canvas-icon-width-container {
+        bottom: 385px;
+        width: 590px;
+    }
+}
+
+@media (max-width: 650px) and (orientation: portrait) {
+    .canvas-icons {
+        width: 50px;
+    }
+
+    .volume-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .expand-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+
+    .start-button {
+        padding: 16px 24px;
+    }
+
+    .control {
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 590px) and (orientation: portrait) {
+    .canvas-icon-width-container {
+        bottom: 360px;
+    }
+
+}
+
+
+@media (max-width: 580px) and (orientation: portrait) {
+
+    .control {
+        padding: 0;
+    }
+
+    .headline-control {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    #rotateOverlay {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 560px) and (orientation: portrait) {
+    .hud {
+        width: 500px;
+    }
+
+    .hud button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .canvas-icon-width-container {
+        bottom: 315px;
+    }
+}
+
+@media (max-width: 530px) and (orientation: portrait) {
+
+    .start-button {
+        padding: 8px 16px;
+        font-size: 16px;
+    }
+
+    .canvas-icon-width-container {
+        bottom: 280px;
+        width: 500px;
+    }
+}
+
+@media (max-width: 560px) and (orientation: portrait) {
+    .panel-left {
+        width: 100px;
+    }
+
+    .panel-right {
+        width: 100px;
+    }
+
+    .hud {
+        width: 400px;
+    }
+}
+
+@media (max-width: 470px) and (orientation: portrait) {
+    .canvas-icon-width-container {
+        bottom: 255px;
+        width: 450px;
+    }
+}
+
+
+@media (max-width: 460px) and (orientation: portrait) {
+
+    .headline-control {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    .start-button {
+        top: 24%;
+    }
+
+    .try-again-btn {
+        padding: 10px 20px;
+    }
+
+    .button-container {
+        bottom: 60px;
+    }
+
+    #rotateOverlay {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 420px) and (orientation: portrait) {
+
+    .hud {
+        width: 300px;
+    }
+
+    .canvas-icon-width-container {
+        bottom: 225px;
+        width: 400px;
+    }
+
+}
+
+@media (max-width: 400px) and (orientation: portrait) {
+
+    .headline-control {
+        font-size: 23px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 380px) and (orientation: portrait) {
+
+    #rotateOverlay {
+        font-size: 18px;
+    }
+
+}
+
+@media (max-height: 1000px) and (orientation: portrait) {
+    .backgroundImage {
+        height: 170vh;
+    }
+}
+
+@media (max-height: 820px) and (orientation: portrait) {
+    .start-button {
+        top: 30%;
+    }
+}
+
