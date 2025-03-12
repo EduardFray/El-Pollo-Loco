@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>El Pollo Loco</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
@@ -53,30 +55,32 @@
 
     <div id="fullscreen">
         <h1>El pollo loco</h1>
-        <canvas id="canvas" width="720" height="480"></canvas>
-        <div class="start-button-container">
-            <button id="startButton" class="start-button" onclick="startGame()">Start Game</button>
-        </div>
-        <div class="button-container">
-            <button id="tryAgainBtn" class="try-again-btn" onclick="tryAgain()">Try Again?</button>
-        </div>
-        <div class="canvas-icon-width-container">
-            <div class="canvas-icon-container">
-                <div class="canvas-icons">
-                    <img class="volume-icon" onclick="switchIcon()" id="volumeIcon" src="img/volume.png"
-                        alt="Volume Icon">
-                    <img class="expand-icon" onclick="canvasFullscreen()" src="./img/expand.png" alt="expand Icon">
+        <div class="fullscreen-canvas" id="fullscreen-canvas">
+            <canvas id="canvas" width="720" height="480"></canvas>
+            <div class="start-button-container">
+                <button id="startButton" class="start-button" onclick="startGame()">Start Game</button>
+            </div>
+            <div class="button-container">
+                <button id="tryAgainBtn" class="try-again-btn" onclick="tryAgain()">Try Again?</button>
+            </div>
+            <div class="canvas-icon-width-container"> 
+                <div class="canvas-icon-container">
+                    <div class="canvas-icons">
+                        <img class="volume-icon" onclick="switchIcon()" id="volumeIcon" src="img/volume.png"
+                            alt="Volume Icon">
+                        <img class="expand-icon" onclick="canvasFullscreen()" src="./img/expand.png" alt="expand Icon">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="hud">
-            <div class="panel-left">
-                <button id="leftBtn"><img src="img/left-arrow.png" alt="left-Arrow"></button>
-                <button id="rightBtn"><img src="img/right-arrow.png" alt="right-Arrow"></button>
-            </div>
-            <div class="panel-right">
-                <button id="jumpBtn"><img src="img/upload.png" alt="jump-btn"></button>
-                <button id="thorwBtn"><img src="img/beer-bottle.png" alt="bottle-thorw-button"></button>
+            <div class="hud">
+                <div class="panel-left">
+                    <button id="leftBtn"><img src="img/left-arrow.png" alt="left-Arrow"></button>
+                    <button id="rightBtn"><img src="img/right-arrow.png" alt="right-Arrow"></button>
+                </div>
+                <div class="panel-right">
+                    <button id="jumpBtn"><img src="img/upload.png" alt="jump-btn"></button>
+                    <button id="thorwBtn"><img src="img/beer-bottle.png" alt="bottle-thorw-button"></button>
+                </div>
             </div>
         </div>
 

@@ -245,43 +245,88 @@ function addHUDListeners() {
 
 
 /**
- * Toggles the fullscreen mode for the canvas.
+ * Adjusts the canvas size when toggling fullscreen mode.
+ */
+function adjustCanvasSizeForFullscreen() {
+    const canvas = document.getElementById('canvas');
+    if (document.fullscreenElement) {
+        // Use CSS to set the size to 100% of the viewport
+        canvas.style.width = '100%';
+        canvas.style.height = '100vh';
+    } else {
+        // Reset CSS styles
+        canvas.style.width = '720px';
+        canvas.style.height = '480px';
+    }
+}
+
+function toggleGameUI(fullscreen) {
+    const uiElements = document.querySelectorAll('.game-ui');
+    uiElements.forEach(el => {
+        el.style.display = fullscreen ? 'none' : 'flex'; // oder 'block', abhängig von deinem Layout
+    });
+}
+
+/**
+ * Toggles fullscreen mode for the canvas container.
  */
 function canvasFullscreen() {
-    let fullscreen = document.getElementById('canvas');
+    let fullscreenElement = document.getElementById('fullscreen-canvas');
     if (document.fullscreenElement) {
         closeFullscreen();
+        toggleGameUI(false);  // UI einblenden, wenn Vollbildmodus verlassen wird
     } else {
-        openFullscreen(fullscreen);
+        openFullscreen(fullscreenElement);
+        toggleGameUI(true);  // UI ausblenden, wenn Vollbildmodus betreten wird
     }
 }
 
 /**
- * Opens the fullscreen mode for a given element.
- * @param {HTMLElement} elem - The element to display in fullscreen mode.
+ * Requests fullscreen mode for a specified element.
  */
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
-        elem.requestFullscreen();
+        elem.requestFullscreen().then(() => {
+            adjustCanvasSizeForFullscreen(); // Stelle sicher, dass die Größe nach dem Wechsel angepasst wird
+            toggleGameUI(true);  // Stelle sicher, dass die UI Elemente ausgeblendet werden
+        });
     } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
+        elem.webkitRequestFullscreen().then(() => {
+            adjustCanvasSizeForFullscreen();
+            toggleGameUI(true);
+        });
     } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
+        elem.msRequestFullscreen().then(() => {
+            adjustCanvasSizeForFullscreen();
+            toggleGameUI(true);
+        });
     }
 }
 
 /**
- * Closes the fullscreen mode.
+ * Exits fullscreen mode and adjusts canvas size accordingly.
  */
 function closeFullscreen() {
     if (document.exitFullscreen) {
-        document.exitFullscreen();
+        document.exitFullscreen().then(() => {
+            adjustCanvasSizeForFullscreen(); // Ensure size is adjusted after exiting fullscreen
+        });
     } else if (document.webkitExitFullscreen) { /* Safari */
-        document.webkitExitFullscreen();
+        document.webkitExitFullscreen().then(() => {
+            adjustCanvasSizeForFullscreen();
+        });
     } else if (document.msExitFullscreen) { /* IE11 */
-        document.webkitExitFullscreen();
+        document.msExitFullscreen().then(() => {
+            adjustCanvasSizeForFullscreen();
+        });
     }
 }
+
+
+// Event Listener für Änderungen im Vollbildstatus
+document.addEventListener('fullscreenchange', adjustCanvasSizeForFullscreen);
+document.addEventListener('webkitfullscreenchange', adjustCanvasSizeForFullscreen);
+document.addEventListener('msfullscreenchange', adjustCanvasSizeForFullscreen);
 
 /**
  * Switches the audio icon and mutes/unmutes all game sounds.
@@ -314,3 +359,5 @@ function checkOrientation() {
 window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);
 window.addEventListener('orientationchange', checkOrientation);
+
+
